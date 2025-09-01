@@ -11,24 +11,38 @@ from wallet import Wallet
 from blockchain import Blockchain
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SESSION_SECRET', 'blockchain_wallet_secret_key_change_in_production')
+# Use SESSION_SECRET environment variable for production security
+secret_key = os.environ.get('SESSION_SECRET')
+if not secret_key:
+    # For development only - in production SESSION_SECRET must be set
+    if os.environ.get('FLASK_ENV') == 'production':
+        raise ValueError('SESSION_SECRET environment variable is required in production')
+    secret_key = 'blockchain_wallet_secret_key_change_in_production'
+app.secret_key = secret_key
 
 # Global wallet instance
 wallet = Wallet()
 
 @app.route('/')
 def index():
-    """Main dashboard page."""
+    """Main dashboard page with optimized response for health checks."""
+    # Quick response for health check requests (no User-Agent or minimal headers)
+    user_agent = request.headers.get('User-Agent', '').lower()
+    if ('healthcheck' in user_agent or 'uptime' in user_agent or 
+        request.args.get('health') == '1'):
+        return jsonify({'status': 'healthy', 'service': 'blockchain-wallet'}), 200
+    
     wallet_info = None
     if wallet.address:
         try:
-            # For faster health check responses, use a lighter check
+            # For faster responses, use lightweight wallet check
             wallet_info = {
                 'address': wallet.address,
                 'unlocked': wallet.is_unlocked,
                 'balance': wallet.get_balance() if wallet.is_unlocked else 0
             }
-        except:
+        except Exception:
+            # Don't let wallet errors break the page
             wallet_info = None
     
     return render_template('index.html', wallet_info=wallet_info)
@@ -160,8 +174,33 @@ def features():
 
 @app.route('/health')
 def health_check():
-    """Health check endpoint for deployment monitoring."""
-    return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()}), 200
+    """Enhanced health check endpoint for deployment monitoring."""
+    try:
+        # Basic application health check
+        health_status = {
+            'status': 'healthy',
+            'timestamp': datetime.now().isoformat(),
+            'service': 'blockchain-wallet',
+            'version': '1.0.0'
+        }
+        
+        # Optional: Quick wallet system check if requested
+        if request.args.get('deep') == '1':
+            try:
+                # Test basic wallet functionality without heavy operations
+                test_wallet = Wallet()
+                health_status['wallet_system'] = 'operational'
+            except Exception:
+                health_status['wallet_system'] = 'degraded'
+        
+        return jsonify(health_status), 200
+    except Exception as e:
+        # Return unhealthy status if there are issues
+        return jsonify({
+            'status': 'unhealthy',
+            'error': str(e),
+            'timestamp': datetime.now().isoformat()
+        }), 503
 
 @app.route('/api/wallet_status')
 def api_wallet_status():
@@ -192,4 +231,7 @@ def lock_wallet():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Production-ready configuration
+    debug_mode = os.environ.get('FLASK_ENV') != 'production'
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)
