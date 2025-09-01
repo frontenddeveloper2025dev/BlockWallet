@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Blockchain Info - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <div class="page-header">
+        <h2>Información del Blockchain</h2>
+        <a href="{{ url_for('index') }}" class="btn btn-outline">Volver</a>
+    </div>
+    
+    {% if blockchain_data %}
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>Estadísticas Generales</h3>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-value">{{ blockchain_data.total_blocks }}</span>
+                    <span class="stat-label">Total de bloques</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ blockchain_data.difficulty }}</span>
+                    <span class="stat-label">Dificultad de minado</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ blockchain_data.mining_reward }}</span>
+                    <span class="stat-label">Recompensa por bloque</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ blockchain_data.pending_transactions }}</span>
+                    <span class="stat-label">Transacciones pendientes</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h3>Estado del Blockchain</h3>
+            <div class="blockchain-status">
+                <p><strong>Hash del último bloque:</strong></p>
+                <code class="hash">{{ blockchain_data.latest_block_hash }}</code>
+                
+                <p><strong>Validez:</strong> 
+                    <span class="status-badge {{ 'valid' if blockchain_data.is_valid else 'invalid' }}">
+                        {{ 'Válido' if blockchain_data.is_valid else 'Inválido' }}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    {% if blockchain_data.recent_blocks %}
+    <div class="info-card">
+        <h3>Bloques Recientes</h3>
+        <div class="blocks-list">
+            {% for block in blockchain_data.recent_blocks %}
+            <div class="block-card">
+                <div class="block-header">
+                    <span class="block-index">Bloque #{{ block.index }}</span>
+                    <span class="block-time">{{ block.timestamp }}</span>
+                </div>
+                <div class="block-details">
+                    <p><strong>Hash:</strong> <code class="hash">{{ block.hash[:32] }}...</code></p>
+                    <p><strong>Transacciones:</strong> {{ block.transactions }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="empty-state">
+        <h3>No hay información disponible</h3>
+        <p>El blockchain no está inicializado.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

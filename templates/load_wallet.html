@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Cargar Wallet - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-card">
+        <h2>Cargar Wallet Existente</h2>
+        <p>Ingresa la contraseña para desbloquear tu wallet cifrado.</p>
+        
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="password">Contraseña del wallet:</label>
+                <input type="password" id="password" name="password" class="form-input" 
+                       placeholder="Ingresa tu contraseña" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cargar Wallet</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+        
+        <div class="info-box">
+            <p><strong>¿No tienes un wallet?</strong></p>
+            <a href="{{ url_for('create_wallet') }}" class="link">Crear nuevo wallet</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

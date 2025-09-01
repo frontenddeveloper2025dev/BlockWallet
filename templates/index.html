@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    {% if wallet_info %}
+    <div class="wallet-status">
+        <div class="status-card">
+            <h2>Mi Wallet</h2>
+            <div class="balance">
+                <span class="balance-label">Balance</span>
+                <span class="balance-amount">{{ "%.6f"|format(wallet_info.balance) }} coins</span>
+            </div>
+            <div class="wallet-details">
+                <p><strong>Dirección:</strong> <span class="address">{{ wallet_info.address }}</span></p>
+                <p><strong>Estado:</strong> 
+                    <span class="status-badge {{ 'unlocked' if wallet_info.is_unlocked else 'locked' }}">
+                        {{ 'Desbloqueado' if wallet_info.is_unlocked else 'Bloqueado' }}
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="blockchain-summary">
+            <h3>Resumen Blockchain</h3>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-value">{{ wallet_info.blockchain_info.total_blocks }}</span>
+                    <span class="stat-label">Bloques</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ wallet_info.blockchain_info.pending_transactions }}</span>
+                    <span class="stat-label">Pendientes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ wallet_info.recent_transactions }}</span>
+                    <span class="stat-label">Transacciones</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">Enviar Transacción</a>
+        <form method="POST" action="{{ url_for('mine_block') }}" style="display: inline;">
+            <button type="submit" class="btn btn-secondary">Minar Bloque</button>
+        </form>
+        <form method="POST" action="{{ url_for('lock_wallet') }}" style="display: inline;">
+            <button type="submit" class="btn btn-outline">Bloquear Wallet</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="no-wallet">
+        <div class="welcome-card">
+            <h2>Bienvenido a Blockchain Wallet</h2>
+            <p>Para comenzar, crea un nuevo wallet o carga uno existente.</p>
+            
+            <div class="wallet-actions">
+                <a href="{{ url_for('create_wallet') }}" class="btn btn-primary">Crear Nuevo Wallet</a>
+                <a href="{{ url_for('load_wallet') }}" class="btn btn-secondary">Cargar Wallet</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Wallet - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-card">
+        <h2>Crear Nuevo Wallet</h2>
+        <p>Se generará un nuevo wallet con clave privada, clave pública y dirección únicos.</p>
+        
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="password">Contraseña para cifrado (opcional):</label>
+                <input type="password" id="password" name="password" class="form-input" 
+                       placeholder="Ingresa una contraseña segura">
+                <small class="form-help">Si proporcionas una contraseña, el wallet se guardará automáticamente de forma cifrada.</small>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Generar Wallet</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+        
+        <div class="warning-box">
+            <h4>⚠️ Importante:</h4>
+            <ul>
+                <li>Guarda tu clave privada de forma segura</li>
+                <li>No compartas tu clave privada con nadie</li>
+                <li>Si pierdes tu clave privada, perderás acceso a tus fondos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

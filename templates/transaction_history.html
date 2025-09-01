@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Historial - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="history-page">
+    <div class="page-header">
+        <h2>Historial de Transacciones</h2>
+        <a href="{{ url_for('index') }}" class="btn btn-outline">Volver</a>
+    </div>
+    
+    {% if transactions %}
+    <div class="transactions-list">
+        {% for tx in transactions %}
+        <div class="transaction-card">
+            <div class="transaction-header">
+                <span class="transaction-type {{ 'received' if tx.recipient_address == wallet.address else 'sent' }}">
+                    {{ 'Recibido' if tx.recipient_address == wallet.address else 'Enviado' }}
+                </span>
+                <span class="transaction-status status-{{ tx.status }}">
+                    {{ tx.status.title() }}
+                </span>
+            </div>
+            
+            <div class="transaction-details">
+                <div class="transaction-amount">
+                    <span class="amount {{ 'positive' if tx.recipient_address == wallet.address else 'negative' }}">
+                        {{ '+' if tx.recipient_address == wallet.address else '-' }}{{ "%.6f"|format(tx.amount) }} coins
+                    </span>
+                    {% if tx.fee > 0 %}
+                    <span class="fee">Comisión: {{ "%.6f"|format(tx.fee) }}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="transaction-info">
+                    <p><strong>De:</strong> <span class="address">{{ tx.sender_address }}</span></p>
+                    <p><strong>Para:</strong> <span class="address">{{ tx.recipient_address }}</span></p>
+                    <p><strong>Fecha:</strong> {{ tx.get_formatted_timestamp() }}</p>
+                    {% if tx.message %}
+                    <p><strong>Mensaje:</strong> {{ tx.message }}</p>
+                    {% endif %}
+                    <p><strong>ID:</strong> <span class="tx-id">{{ tx.transaction_id }}</span></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>Sin transacciones</h3>
+        <p>Aún no tienes transacciones en tu wallet.</p>
+        <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">Enviar primera transacción</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

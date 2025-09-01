@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Enviar Transacción - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-card">
+        <h2>Enviar Transacción</h2>
+        
+        <div class="balance-info">
+            <span class="balance-label">Balance disponible:</span>
+            <span class="balance-amount">{{ "%.6f"|format(balance) }} coins</span>
+        </div>
+        
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="recipient">Dirección del destinatario:</label>
+                <input type="text" id="recipient" name="recipient" class="form-input" 
+                       placeholder="Dirección del wallet destinatario" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="amount">Cantidad:</label>
+                    <input type="number" id="amount" name="amount" class="form-input" 
+                           step="0.000001" min="0.000001" placeholder="0.000000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fee">Comisión:</label>
+                    <input type="number" id="fee" name="fee" class="form-input" 
+                           step="0.000001" min="0" value="0.001">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Mensaje (opcional):</label>
+                <input type="text" id="message" name="message" class="form-input" 
+                       placeholder="Mensaje opcional">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Enviar Transacción</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+        
+        <div class="info-box">
+            <p><strong>Nota:</strong> Las transacciones quedan pendientes hasta que se mine el siguiente bloque.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
