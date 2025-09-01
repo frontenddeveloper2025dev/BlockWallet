@@ -11,7 +11,7 @@ from wallet import Wallet
 from blockchain import Blockchain
 
 app = Flask(__name__)
-app.secret_key = 'blockchain_wallet_secret_key_change_in_production'
+app.secret_key = os.environ.get('SESSION_SECRET', 'blockchain_wallet_secret_key_change_in_production')
 
 # Global wallet instance
 wallet = Wallet()
@@ -22,7 +22,12 @@ def index():
     wallet_info = None
     if wallet.address:
         try:
-            wallet_info = wallet.get_wallet_info()
+            # For faster health check responses, use a lighter check
+            wallet_info = {
+                'address': wallet.address,
+                'unlocked': wallet.is_unlocked,
+                'balance': wallet.get_balance() if wallet.is_unlocked else 0
+            }
         except:
             wallet_info = None
     
@@ -152,6 +157,11 @@ def blockchain_info():
 def features():
     """Features showcase page."""
     return render_template('features.html')
+
+@app.route('/health')
+def health_check():
+    """Health check endpoint for deployment monitoring."""
+    return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()}), 200
 
 @app.route('/api/wallet_status')
 def api_wallet_status():
