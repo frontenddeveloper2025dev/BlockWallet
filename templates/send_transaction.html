@@ -5,7 +5,13 @@
 {% block content %}
 <div class="form-page">
     <div class="form-card">
-        <h2>Enviar Transacción</h2>
+        <div class="form-header">
+            <div class="form-icon">
+                <span class="icon icon-send icon-large"></span>
+            </div>
+            <h2>Enviar Transacción</h2>
+            <p class="form-subtitle">Transfiere fondos de forma segura a cualquier dirección de wallet</p>
+        </div>
         
         <div class="balance-info">
             <span class="balance-label">Balance disponible:</span>
@@ -45,8 +51,24 @@
             </div>
         </form>
         
-        <div class="info-box">
-            <p><strong>Nota:</strong> Las transacciones quedan pendientes hasta que se mine el siguiente bloque.</p>
+        <div class="transaction-info">
+            <div class="info-box">
+                <p><strong><span class="icon icon-mining"></span>Proceso de Transacción:</strong></p>
+                <ol class="process-list">
+                    <li>Tu transacción se firma criptográficamente</li>
+                    <li>Se añade al pool de transacciones pendientes</li>
+                    <li>Un minero incluirá tu transacción en un bloque</li>
+                    <li>Una vez minado, tu transacción estará confirmada</li>
+                </ol>
+            </div>
+            <div class="security-reminder">
+                <h4><span class="icon icon-secure"></span>Verificación de Seguridad:</h4>
+                <ul>
+                    <li>Verifica siempre la dirección del destinatario</li>
+                    <li>Las transacciones son irreversibles</li>
+                    <li>La comisión ayuda a procesar tu transacción más rápido</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

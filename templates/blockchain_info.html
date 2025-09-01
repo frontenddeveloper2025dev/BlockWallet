@@ -5,8 +5,16 @@
 {% block content %}
 <div class="info-page">
     <div class="page-header">
-        <h2>Información del Blockchain</h2>
-        <a href="{{ url_for('index') }}" class="btn btn-outline">Volver</a>
+        <div class="page-title">
+            <span class="icon icon-blockchain icon-large"></span>
+            <div>
+                <h2>Información del Blockchain</h2>
+                <p class="page-subtitle">Explora el estado actual de la red blockchain</p>
+            </div>
+        </div>
+        <a href="{{ url_for('index') }}" class="btn btn-outline">
+            <span class="icon icon-wallet"></span>Volver al Dashboard
+        </a>
     </div>
     
     {% if blockchain_data %}
@@ -69,8 +77,14 @@
     {% endif %}
     {% else %}
     <div class="empty-state">
-        <h3>No hay información disponible</h3>
-        <p>El blockchain no está inicializado.</p>
+        <div class="empty-icon">
+            <span class="icon icon-blockchain" style="width: 64px; height: 64px; opacity: 0.3;"></span>
+        </div>
+        <h3>Blockchain no inicializado</h3>
+        <p>El blockchain se inicializará automáticamente cuando crees tu primer wallet.</p>
+        <a href="{{ url_for('create_wallet') }}" class="btn btn-primary">
+            <span class="icon icon-plus"></span>Crear Wallet para Comenzar
+        </a>
     </div>
     {% endif %}
 </div>

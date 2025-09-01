@@ -23,7 +23,7 @@
         </div>
 
         <div class="blockchain-summary">
-            <h3>Resumen Blockchain</h3>
+            <h3><span class="icon icon-blockchain"></span>Resumen Blockchain</h3>
             <div class="stats">
                 <div class="stat">
                     <span class="stat-value">{{ wallet_info.blockchain_info.total_blocks }}</span>
@@ -42,23 +42,70 @@
     </div>
 
     <div class="actions">
-        <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">Enviar Transacción</a>
+        <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">
+            <span class="icon icon-send"></span>Enviar Transacción
+        </a>
         <form method="POST" action="{{ url_for('mine_block') }}" style="display: inline;">
-            <button type="submit" class="btn btn-secondary">Minar Bloque</button>
+            <button type="submit" class="btn btn-secondary">
+                <span class="icon icon-mining"></span>Minar Bloque
+            </button>
         </form>
         <form method="POST" action="{{ url_for('lock_wallet') }}" style="display: inline;">
-            <button type="submit" class="btn btn-outline">Bloquear Wallet</button>
+            <button type="submit" class="btn btn-outline">
+                <span class="icon icon-lock"></span>Bloquear Wallet
+            </button>
         </form>
+    </div>
+    
+    <div class="quick-info">
+        <div class="info-card">
+            <h3><span class="icon icon-blockchain"></span>¿Qué es un Blockchain Wallet?</h3>
+            <p>Un wallet blockchain es tu puerta de entrada al mundo de las criptomonedas. Te permite almacenar, enviar y recibir monedas digitales de forma segura utilizando criptografía avanzada.</p>
+            <ul class="info-list">
+                <li><strong>Seguridad:</strong> Tus claves privadas están cifradas y protegidas</li>
+                <li><strong>Control:</strong> Solo tú tienes acceso a tus fondos</li>
+                <li><strong>Transparencia:</strong> Todas las transacciones son verificables</li>
+                <li><strong>Descentralización:</strong> No depende de bancos ni intermediarios</li>
+            </ul>
+        </div>
     </div>
     {% else %}
     <div class="no-wallet">
         <div class="welcome-card">
-            <h2>Bienvenido a Blockchain Wallet</h2>
-            <p>Para comenzar, crea un nuevo wallet o carga uno existente.</p>
+            <div class="welcome-hero">
+                <div class="hero-icon">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Blockchain" class="hero-logo">
+                </div>
+                <h2>Bienvenido a Blockchain Wallet</h2>
+                <p class="hero-subtitle">Tu wallet descentralizado seguro y fácil de usar</p>
+                <p class="hero-description">Gestiona tus criptomonedas de forma segura con tecnología blockchain avanzada. Envía, recibe y mina bloques con total control sobre tus fondos.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <span class="icon icon-secure icon-large"></span>
+                    <h4>Totalmente Seguro</h4>
+                    <p>Cifrado de grado militar y claves privadas protegidas</p>
+                </div>
+                <div class="feature">
+                    <span class="icon icon-send icon-large"></span>
+                    <h4>Transacciones Rápidas</h4>
+                    <p>Envía y recibe criptomonedas de forma instantánea</p>
+                </div>
+                <div class="feature">
+                    <span class="icon icon-mining icon-large"></span>
+                    <h4>Minado Integrado</h4>
+                    <p>Gana recompensas minando bloques desde tu wallet</p>
+                </div>
+            </div>
             
             <div class="wallet-actions">
-                <a href="{{ url_for('create_wallet') }}" class="btn btn-primary">Crear Nuevo Wallet</a>
-                <a href="{{ url_for('load_wallet') }}" class="btn btn-secondary">Cargar Wallet</a>
+                <a href="{{ url_for('create_wallet') }}" class="btn btn-primary">
+                    <span class="icon icon-plus"></span>Crear Nuevo Wallet
+                </a>
+                <a href="{{ url_for('load_wallet') }}" class="btn btn-secondary">
+                    <span class="icon icon-download"></span>Cargar Wallet
+                </a>
             </div>
         </div>
     </div>

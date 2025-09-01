@@ -5,8 +5,16 @@
 {% block content %}
 <div class="history-page">
     <div class="page-header">
-        <h2>Historial de Transacciones</h2>
-        <a href="{{ url_for('index') }}" class="btn btn-outline">Volver</a>
+        <div class="page-title">
+            <span class="icon icon-history icon-large"></span>
+            <div>
+                <h2>Historial de Transacciones</h2>
+                <p class="page-subtitle">Revisa todas tus transacciones enviadas y recibidas</p>
+            </div>
+        </div>
+        <a href="{{ url_for('index') }}" class="btn btn-outline">
+            <span class="icon icon-wallet"></span>Volver al Dashboard
+        </a>
     </div>
     
     {% if transactions %}
@@ -47,9 +55,20 @@
     </div>
     {% else %}
     <div class="empty-state">
+        <div class="empty-icon">
+            <span class="icon icon-history" style="width: 64px; height: 64px; opacity: 0.3;"></span>
+        </div>
         <h3>Sin transacciones</h3>
         <p>Aún no tienes transacciones en tu wallet.</p>
-        <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">Enviar primera transacción</a>
+        <p class="empty-description">Una vez que envíes o recibas fondos, aparecerán aquí con todos los detalles de la transacción.</p>
+        <div class="empty-actions">
+            <a href="{{ url_for('send_transaction') }}" class="btn btn-primary">
+                <span class="icon icon-send"></span>Enviar Primera Transacción
+            </a>
+            <a href="{{ url_for('mine_block') }}" class="btn btn-secondary">
+                <span class="icon icon-mining"></span>Minar para Ganar Fondos
+            </a>
+        </div>
     </div>
     {% endif %}
 </div>

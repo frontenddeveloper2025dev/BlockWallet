@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Características - Blockchain Wallet{% endblock %}
+
+{% block content %}
+<div class="features-page">
+    <div class="page-header">
+        <div class="page-title">
+            <span class="icon icon-secure icon-large"></span>
+            <div>
+                <h2>Características del Blockchain Wallet</h2>
+                <p class="page-subtitle">Descubre todo lo que puedes hacer con tu wallet descentralizado</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="features-showcase">
+        <div class="feature-hero">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Blockchain" class="feature-hero-image floating-element">
+            <h3>Tecnología Blockchain Avanzada</h3>
+            <p>Construido con las mejores prácticas de seguridad y criptografía moderna para proteger tus activos digitales.</p>
+        </div>
+        
+        <div class="features-detail-grid">
+            <div class="feature-detail">
+                <span class="icon icon-secure icon-large glow"></span>
+                <h4>Seguridad Máxima</h4>
+                <p>Utiliza criptografía ECDSA con curva SECP256k1, la misma que Bitcoin. Tus claves privadas están protegidas con cifrado AES y derivación de claves PBKDF2.</p>
+                <ul class="feature-list">
+                    <li>Cifrado de grado militar</li>
+                    <li>Almacenamiento seguro de claves</li>
+                    <li>Firmas digitales verificables</li>
+                    <li>Protección contra ataques</li>
+                </ul>
+            </div>
+            
+            <div class="feature-detail">
+                <span class="icon icon-send icon-large glow"></span>
+                <h4>Transacciones Rápidas</h4>
+                <p>Envía y recibe fondos de forma inmediata con nuestro sistema de transacciones optimizado y pool de transacciones eficiente.</p>
+                <ul class="feature-list">
+                    <li>Transacciones instantáneas</li>
+                    <li>Comisiones personalizables</li>
+                    <li>Validación automática</li>
+                    <li>Historial completo</li>
+                </ul>
+            </div>
+            
+            <div class="feature-detail">
+                <span class="icon icon-mining icon-large glow"></span>
+                <h4>Minado Integrado</h4>
+                <p>Participa en la red blockchain minando bloques directamente desde tu wallet. Gana recompensas por mantener la red segura.</p>
+                <ul class="feature-list">
+                    <li>Minado proof-of-work</li>
+                    <li>Recompensas automáticas</li>
+                    <li>Dificultad ajustable</li>
+                    <li>Progreso en tiempo real</li>
+                </ul>
+            </div>
+            
+            <div class="feature-detail">
+                <span class="icon icon-blockchain icon-large glow"></span>
+                <h4>Blockchain Transparente</h4>
+                <p>Toda la información de la blockchain es visible y verificable. Explora bloques, transacciones y el estado de la red.</p>
+                <ul class="feature-list">
+                    <li>Explorador de bloques</li>
+                    <li>Validación de cadena</li>
+                    <li>Estadísticas en tiempo real</li>
+                    <li>Auditoría completa</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="technology-section">
+            <h3>Tecnologías Utilizadas</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h5>ECDSA SECP256k1</h5>
+                    <p>Criptografía de curva elíptica para firmas digitales seguras</p>
+                </div>
+                <div class="tech-item">
+                    <h5>SHA-256</h5>
+                    <p>Función hash criptográfica para integridad de datos</p>
+                </div>
+                <div class="tech-item">
+                    <h5>Base58</h5>
+                    <p>Codificación de direcciones legible y segura</p>
+                </div>
+                <div class="tech-item">
+                    <h5>PBKDF2</h5>
+                    <p>Derivación de claves resistente a ataques de fuerza bruta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
