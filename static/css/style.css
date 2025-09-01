@@ -764,6 +764,22 @@ p {
     margin-bottom: 1rem;
 }
 
+.hero-image {
+    width: 350px;
+    height: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 15px 35px rgba(59, 130, 246, 0.4));
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+}
+
+.hero-visual {
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
 .hero-logo {
     width: 80px;
     height: 80px;
@@ -771,10 +787,12 @@ p {
 }
 
 .hero-subtitle {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     color: #3b82f6;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    letter-spacing: 0.025em;
 }
 
 .hero-description {
@@ -797,14 +815,37 @@ p {
     text-align: center;
     padding: 1.5rem;
     background: rgba(59, 130, 246, 0.05);
-    border-radius: 8px;
+    border-radius: 12px;
     border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.glow-card {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 41, 59, 0.8) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+}
+
+.glow-card:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(30, 41, 59, 0.9) 100%);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
 }
 
 .feature h4 {
     margin: 1rem 0 0.5rem 0;
-    color: #3b82f6;
-    font-size: 0.875rem;
+    color: #60a5fa;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
 }
 
 .feature p {

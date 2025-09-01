@@ -148,6 +148,11 @@ def blockchain_info():
     
     return render_template('blockchain_info.html', blockchain_data=blockchain_data)
 
+@app.route('/features')
+def features():
+    """Features showcase page."""
+    return render_template('features.html')
+
 @app.route('/api/wallet_status')
 def api_wallet_status():
     """API endpoint for wallet status."""
