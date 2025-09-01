@@ -10,7 +10,11 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1 class="logo">₿ Blockchain Wallet</h1>
+            <h1 class="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Blockchain Logo" class="logo-img">
+                Blockchain
+                <span style="font-size: 0.6em; color: #94a3b8; font-weight: 400; margin-left: 0.5rem;">online wallet</span>
+            </h1>
             <nav class="nav">
                 <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
                 <a href="{{ url_for('send_transaction') }}" class="nav-link">Enviar</a>
